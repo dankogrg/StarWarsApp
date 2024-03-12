@@ -6,7 +6,6 @@ import { PromiseAll } from '../services/Promise';
 import { getVehicles } from '../services/Vehicles';
 import SpecieStarships from '../components/SpecieStarships';
 import { getStarships } from '../services/Starships';
-import { getResource } from '../lib/axios';
 
 const isLoadedInitialState: boolean = false;
 const userInitialState: string = '';
@@ -39,7 +38,7 @@ const Specie = ({ species, params }: any) => {
                         ? setVehicles(result[1])
                         : setStarships(result[1]);
                 })
-                .catch((error) => console.warn())
+                .catch((error) => console.warn(error))
                 .finally(() => setIsLoaded(true));
         } catch (error) {}
     }, [specieName, species]);

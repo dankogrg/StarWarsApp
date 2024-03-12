@@ -1,5 +1,5 @@
-import Specie from '../entities/Specie';
 import Main from '../layouts/Main';
+import { convertToLocaleDateAndTime } from '../utils/helpers';
 
 const StarshipMovies = ({ movies }: any): JSX.Element => {
     return (
@@ -20,7 +20,12 @@ const StarshipMovies = ({ movies }: any): JSX.Element => {
                                     <tr key={index}>
                                         <td>{movie.title}</td>
                                         <td>{movie.id}</td>
-                                        <td>{movie.releaseDate}</td>
+                                        <td>
+                                            {convertToLocaleDateAndTime(
+                                                movie.releaseDate,
+                                                'hr',
+                                            )}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

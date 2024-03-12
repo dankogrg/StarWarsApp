@@ -1,8 +1,8 @@
 import { getResource } from '../lib/axios';
 
 export const getMovies = async (movieUrl: string) => {
-    const movieList: Array<any> = [];
-    let response: any;
+    const movieList: Array<object> = [];
+    let response;
 
     const fillMovieList = (movie: any) => {
         movieList.push({

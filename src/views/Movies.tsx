@@ -1,31 +1,30 @@
 import { useEffect, useState } from 'react';
 import { PromiseAll } from '../services/Promise';
-import { getUser } from '../services/Users';
 import { getStarships } from '../services/Starships';
 import WithRouter from '../layouts/WithRouter';
 import { getMovies } from '../services/fillMovies';
 import StarshipMovies from '../components/StarshipMovies';
 
-const moviesInitialState: any = [];
+const moviesInitialState: Array<Object> = [{}];
 const isLoadedInitialState: boolean = false;
-const oneMovie: Object = {};
 
 const Movies = ({ species, params }: any): JSX.Element => {
     const [isLoaded, setIsLoaded] = useState<boolean>(isLoadedInitialState);
-    const [movies, setMovies] = useState<any>(moviesInitialState);
-    const [movie, setMovie] = useState<Object>(oneMovie);
-    const user = 'Wookiee';
+    const [movies, setMovies] = useState<Object>(moviesInitialState);
+    const specieName = 'Wookiee';
+    const user = 'Chewbacca';
     const { starshipIndex } = params;
-    let a = [{}];
     useEffect(() => {
         setIsLoaded(false);
 
-        PromiseAll([getStarships(user)])
+        PromiseAll([getStarships(specieName)])
             .then((result) => result[0][starshipIndex].films)
             .then((movieUrls) =>
                 PromiseAll(
-                    movieUrls.map((movieUrl: any) =>
-                        getMovies(movieUrl).then((data: any) => data[0]),
+                    movieUrls.map((movieUrl: string) =>
+                        getMovies(movieUrl).then(
+                            (data: Array<object>) => data[0],
+                        ),
                     ),
                 ),
             )
@@ -41,7 +40,7 @@ const Movies = ({ species, params }: any): JSX.Element => {
                 movies={movies}
                 user={user}
                 species={species}
-                specieName={user}
+                specieName={specieName}
             />
         </div>
     );
