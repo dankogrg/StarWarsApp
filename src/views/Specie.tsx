@@ -27,7 +27,6 @@ const Specie = ({ species, params }: any) => {
         const userUrl: string = species.find(
             ({ name }: any) => name === specieName,
         )?.people[0];
-        console.log(userUrl);
 
         const getSpecieTransport =
             specieName != 'Wookiee' ? getVehicles : getStarships;

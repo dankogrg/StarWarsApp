@@ -16,18 +16,23 @@ const Movies = ({ species, params }: any): JSX.Element => {
     const [movie, setMovie] = useState<Object>(oneMovie);
     const user = 'Wookiee';
     const { starshipIndex } = params;
+    let a = [{}];
     useEffect(() => {
         setIsLoaded(false);
+
         PromiseAll([getStarships(user)])
             .then((result) => result[0][starshipIndex].films)
             .then((movieUrls) =>
-                movieUrls.map((movieUrl: any) => getMovies(movieUrl)),
+                PromiseAll(
+                    movieUrls.map((movieUrl: any) =>
+                        getMovies(movieUrl).then((data: any) => data[0]),
+                    ),
+                ),
             )
             .then((movieList) => setMovies(movieList))
             .catch((error) => console.warn(error))
             .finally(() => setIsLoaded(true));
     }, []);
-    console.log(movies);
 
     return (
         <div>
@@ -36,7 +41,7 @@ const Movies = ({ species, params }: any): JSX.Element => {
                 movies={movies}
                 user={user}
                 species={species}
-                specieName={user.toLocaleLowerCase()}
+                specieName={user}
             />
         </div>
     );

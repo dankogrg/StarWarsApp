@@ -2,9 +2,6 @@ import Specie from '../entities/Specie';
 import Main from '../layouts/Main';
 
 const StarshipMovies = ({ movies }: any): JSX.Element => {
-    const m = movies.map((movie: any) => movie.then((data: any) => data[0]));
-    console.log(m);
-
     return (
         <div className="container py-5">
             <div className="row">
@@ -19,7 +16,7 @@ const StarshipMovies = ({ movies }: any): JSX.Element => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {m.map((movie: any, index: number) => (
+                                {movies.map((movie: any, index: number) => (
                                     <tr key={index}>
                                         <td>{movie.title}</td>
                                         <td>{movie.id}</td>
