@@ -33,6 +33,14 @@ const Movies = ({ species, params }: any): JSX.Element => {
             .finally(() => setIsLoaded(true));
     }, []);
 
+    function add(n: any): any {
+        if (n == 20) {
+            return n;
+        }
+        return add(n + 1);
+    }
+    console.log(add(1));
+
     return (
         <div>
             <StarshipMovies

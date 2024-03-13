@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Specie from '../entities/Specie';
 import { handleImage } from '../utils/helpers';
 

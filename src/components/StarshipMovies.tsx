@@ -1,5 +1,5 @@
 import Main from '../layouts/Main';
-import { convertToLocaleDateAndTime } from '../utils/helpers';
+import { convertToLocaleDateAndTime, handleImage } from '../utils/helpers';
 
 const StarshipMovies = ({ movies }: any): JSX.Element => {
     return (
@@ -15,10 +15,25 @@ const StarshipMovies = ({ movies }: any): JSX.Element => {
                                     <th>Release Date</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style={{ verticalAlign: 'middle' }}>
                                 {movies.map((movie: any, index: number) => (
                                     <tr key={index}>
-                                        <td>{movie.title}</td>
+                                        <td>
+                                            <img
+                                                src={handleImage(
+                                                    `f${movie.id}`,
+                                                )}
+                                                alt=""
+                                            />
+                                        </td>
+                                        <td
+                                            style={{
+                                                fontWeight: 'bold',
+                                                fontSize: '30px',
+                                            }}
+                                        >
+                                            {movie.title}
+                                        </td>
                                         <td>{movie.id}</td>
                                         <td>
                                             {convertToLocaleDateAndTime(
